@@ -15,6 +15,31 @@ birds$Sex <- as.factor(birds$Sex)
 males <- birds[birds$Sex=="m", ]
 females <- birds[birds$Sex=="f", ]
 
+## Summary statistics
+# Means
+summary(males)
+m_mean_brain <- summary(males)[4,3] 
+m_mean_body <- summary(males)[4,4]
+
+summary(females)
+f_mean_brain <- summary(females)[4,3]
+f_mean_body <- summary(females)[4,4]
+
+
+# Standard deviations
+m_sd_brain <- sd(males$brain_mass)
+m_sd_body <- sd(males$body_mass)
+
+f_sd_brain <- sd(females$brain_mass)
+f_sd_body <- sd(females$body_mass)
+
+# Table of means and SDs
+sum_stats <- data.frame(sex = c("male", "female"),
+                    mean_brain_size = c(m_mean_brain, f_mean_brain),
+                    mean_body_size = c(m_mean_body, f_mean_body),
+                    sd_brain_size = c(m_sd_brain, f_sd_brain),
+                    sd_body_size = c(m_sd_body, f_sd_body))
+
 ## Fit linear model to log-transformed brain and body sizes
 mm <- lm(log(brain_mass) ~ log(body_mass), data=males)
 mf <- lm(log(brain_mass) ~ log(body_mass), data=females)
@@ -25,12 +50,14 @@ hist(residuals(mf))
 
 ## Check model for males 
 summary(mm)
+
 # intercept = -1.906
 # slope = 0.55 --> brain size increases by 5.5% per 10% increase in body size
 # R-squared = 0.8345 --> 83.45% of variance in brain size explained by body mass 
 
 ## Check model for females 
 summary(mf)
+
 # intercept = -1.998
 # slope = 0.575 --> brain size increases by 5.8% per 10% increase in body size
 # R-squared = 0.8307
