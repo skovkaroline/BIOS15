@@ -33,12 +33,29 @@ m_sd_body <- sd(males$body_mass)
 f_sd_brain <- sd(females$brain_mass)
 f_sd_body <- sd(females$body_mass)
 
-# Table of means and SDs
+# Min. and max. values 
+m_min_brain <- summary(males)[1,3]
+m_max_brain <- summary(males)[6,3]
+
+m_min_body <- summary(males)[1,4]
+m_max_body <- summary(males)[6,4]
+
+f_min_brain <- summary(females)[1,3]
+f_max_brain <- summary(females)[6,3]
+
+f_min_body <- summary(females)[1,4]
+f_max_body <- summary(females)[6,4]
+
+# Table of summary stats 
 sum_stats <- data.frame(sex = c("male", "female"),
                     mean_brain_size = c(m_mean_brain, f_mean_brain),
                     mean_body_size = c(m_mean_body, f_mean_body),
                     sd_brain_size = c(m_sd_brain, f_sd_brain),
-                    sd_body_size = c(m_sd_body, f_sd_body))
+                    sd_body_size = c(m_sd_body, f_sd_body), 
+                    min_brain = c(m_min_brain, f_min_brain),
+                    max_brain = c(m_max_brain, f_max_brain),
+                    min_body = c(m_min_body, f_min_body),
+                    max_body = c(m_max_body, f_max_body))
 
 ## Fit linear model to log-transformed brain and body sizes
 mm <- lm(log(brain_mass) ~ log(body_mass), data=males)
