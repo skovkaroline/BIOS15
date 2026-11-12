@@ -47,11 +47,14 @@ ggplot(birds, aes(log(body_mass), log(brain_mass), color = Sex)) +
     y = "Log (brain mass)"
   ) +
   geom_smooth(method = "lm") + 
+  scale_x_continuous(breaks = seq(0, 12, by = 2)) + 
+  scale_y_continuous(limits = c(-1, 4)) + 
   theme(legend.position = c(0.9,0.2),
         axis.title.x = element_text(size=12),
         axis.title.y = element_text(size=12),
         axis.text.x = element_text(size=12),
         axis.text.y = element_text(size=12),
         legend.text = element_text(size=12),
-        legend.title = element_text(size=12))
+        legend.title = element_text(size=12),
+        panel.background = element_rect(color = "black", fill = NA, linewidth=0.7))
 
